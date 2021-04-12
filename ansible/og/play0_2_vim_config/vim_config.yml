@@ -1,0 +1,12 @@
+---
+- name: Configuring vim for editing yml files
+  hosts: web
+  tasks:
+
+    - name: Deploying vim config file
+      copy:
+        content: |
+        autocmd FileType yaml sertlocal ai ts=2 sw=2 et nu cuc
+        autocmd FileType yaml colo desert
+        dest: ~/.vimrc
+...

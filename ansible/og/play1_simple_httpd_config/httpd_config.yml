@@ -22,12 +22,18 @@
         state: started
         enabled: true
 
-    - name: Creating firewall rules
+    - name: Configuring firewalld to allow http service
       firewalld:
         service: http
         state: enabled
         immediate: true
         permanent: true
+
+    - name: firewalld enabled and running
+      service:
+        name: firewalld
+        state: restarted
+        enabled: true
 
 - name: Testing connectivity
   hosts: localhost
