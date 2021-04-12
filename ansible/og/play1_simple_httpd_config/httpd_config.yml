@@ -16,12 +16,6 @@
         dest: /var/www/html/index.html   #/var/www/html/
         mode: preserve
 
-    - name: Starting httpd
-      service:         
-        name: httpd
-        state: started
-        enabled: true
-
     - name: Configuring firewalld to allow http service
       firewalld:
         service: http
@@ -33,6 +27,12 @@
       service:
         name: firewalld
         state: restarted
+        enabled: true
+
+    - name: Starting httpd services
+      service:
+        name: httpd
+        state: started
         enabled: true
 
 - name: Testing connectivity
