@@ -7,3 +7,4 @@ Note:
      
   3. While running the playbook deployEC2.yml use:
      cmd# ansible-playbook --vault-id user@prompt deployEC2.yml
+     
