@@ -1,0 +1,22 @@
+---
+# tasks file for awsEC2deploy
+- name: Provisioning OS on AWS Cloud
+  ec2:
+    state: present
+    region: "{{ region_aws }}"
+    image: "{{ image_aws }}"
+    instance_type: "{{ instance_type_aws }}"
+    count: "{{ count_aws }}"
+    vpc_subnet_id: "{{ vpc_subnet_id_aws }}"
+    assign_public_ip: "{{ assign_public_ip_aws }}"
+    group_id: "{{ group_id_aws }}"
+    key_name: "{{ key_name_aws }}"
+    wait: yes
+    aws_access_key: "{{ access_key  }}"
+    aws_secret_key: "{{ secret_access_key }}"
+
+  register: log
+
+- debug:
+    var: log
+...

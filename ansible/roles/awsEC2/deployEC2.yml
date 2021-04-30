@@ -1,0 +1,9 @@
+---
+- name: Launching role
+  hosts: localhost
+  vars_files:
+    - awsEC2deploy/vars/var.yml
+  roles:
+    - role: awsEC2deploy
+  
+...

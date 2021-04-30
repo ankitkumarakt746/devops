@@ -15,14 +15,14 @@
         src: ./files/index.html          #./files/
         dest: /var/www/html/index.html   #/var/www/html/
         mode: preserve
-
+        
     - name: Configuring firewalld to allow http service
       firewalld:
         service: http
         state: enabled
         immediate: true
         permanent: true
-
+        
     - name: firewalld enabled and running
       service:
         name: firewalld
