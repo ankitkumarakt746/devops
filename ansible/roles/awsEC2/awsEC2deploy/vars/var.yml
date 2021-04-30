@@ -3,8 +3,8 @@ region_aws: "ap-south-1"
 image_aws: "ami-0a9d27a9f4f5c0efc"
 instance_type_aws: "t2.micro"
 count_aws: 1
-vpc_subnet_id_aws: "subnet-8b2b27e3"
+vpc_subnet_id_aws: ""
 assign_public_ip_aws: yes
-group_id_aws: "sg-0aaceb864233387d9"
-key_name_aws: "mykey951753"
+group_id_aws: ""
+key_name_aws: ""
 ...
