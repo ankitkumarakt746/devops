@@ -1,0 +1,14 @@
+---
+- name: Launching role
+  hosts: localhost
+  tasks:
+    - name: tsk2
+      authorized_key:
+        user: root
+        state: present
+        key: "{{ item }}"
+      with_file:
+        - ~/.ssh/id_rsa.pub
+  
+...
+

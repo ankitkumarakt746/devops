@@ -1,15 +1,16 @@
 ---
 - name: Configuring Apache HTTPD
   hosts: web
-  become: true
+  become: True
+  gather_facts: True
   tasks:
 
     - name: Ensuring httpd package presence
       yum:
         name: httpd
         state: present    #latest
-      when: ansible_distribution == "RedHat" or ansible_distribution == "CentOS"
-    
+      when: (ansible_distribution == "RedHat" or ansible_distribution == "CentOS" or ansible_distribution == "Fedora")
+
     - name: Copying index.html
       copy:
         src: ./files/index.html          #./files/
@@ -22,18 +23,21 @@
         state: enabled
         immediate: true
         permanent: true
-        
-    - name: firewalld enabled and running
-      service:
-        name: firewalld
-        state: restarted
-        enabled: true
+      notify: firewall changed
 
     - name: Starting httpd services
       service:
         name: httpd
         state: started
         enabled: true
+  
+  handlers:
+    - name: firewall changed
+      service:
+        name: firewalld
+        state: restarted
+        enabled: true 
+
 
 - name: Testing connectivity
   hosts: localhost
@@ -41,7 +45,8 @@
 
     - name: Connecting to webserver
       uri:
-        url: http://192.168.1.10:80/index.html
+        url: http://{{ item }}/index.html
         return_content: yes
         status_code: 200
-...
+      loop: "{{ groups.all }}"
+

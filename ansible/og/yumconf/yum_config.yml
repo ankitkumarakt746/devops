@@ -1,0 +1,29 @@
+- name: Updating yum repositories
+  hosts: server
+  gather_facts: True
+  become: False
+  vars:
+    - file_urls:
+      - 
+      -
+      -
+
+    - files:
+      - 
+      - 
+      - 
+
+  tasks:
+
+    - name: Fetching resources from GitHub
+      get_url:
+        url: "{{ item }}"
+        dest: /root/Downloads/
+      loop: file_urls
+      when: 
+      handlers:
+
+    - name: Updating yum repository
+      command: "rpm -i /root/Downloads/{{ item }}"
+      loop: files
+      handlers:
